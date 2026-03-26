@@ -28,18 +28,15 @@ export default function setSplitText() {
       para.split?.revert();
     }
 
-    para.split = new SplitText(para, {
+    const split = new SplitText(para, {
       type: "lines,words",
       linesClass: "split-line",
     });
 
-    // ✅ SAFE CHECK
-    if (!para.split) return;
-
-    const words = para.split.words || [];
+    para.split = split;
 
     para.anim = gsap.fromTo(
-      words,
+      split.words!,   // ✅ FINAL FIX
       { autoAlpha: 0, y: 80 },
       {
         autoAlpha: 1,
@@ -62,18 +59,15 @@ export default function setSplitText() {
       title.split?.revert();
     }
 
-    title.split = new SplitText(title, {
+    const split = new SplitText(title, {
       type: "chars,lines",
       linesClass: "split-line",
     });
 
-    // ✅ SAFE CHECK
-    if (!title.split) return;
-
-    const chars = title.split.chars || [];
+    title.split = split;
 
     title.anim = gsap.fromTo(
-      chars,
+      split.chars!,   // ✅ FINAL FIX
       { autoAlpha: 0, y: 80, rotate: 10 },
       {
         autoAlpha: 1,
