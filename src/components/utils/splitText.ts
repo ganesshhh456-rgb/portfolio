@@ -1,6 +1,5 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
 
 interface ParaElement extends HTMLElement {
@@ -8,7 +7,8 @@ interface ParaElement extends HTMLElement {
   split?: SplitText;
 }
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother, SplitText);
+// ❌ ScrollSmoother hata diya
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export default function setSplitText() {
   ScrollTrigger.config({ ignoreMobileResize: true });
@@ -36,7 +36,7 @@ export default function setSplitText() {
     para.split = split;
 
     para.anim = gsap.fromTo(
-      split.words!,   // ✅ FINAL FIX
+      split.words || [],   // ✅ safe fix
       { autoAlpha: 0, y: 80 },
       {
         autoAlpha: 1,
@@ -67,7 +67,7 @@ export default function setSplitText() {
     title.split = split;
 
     title.anim = gsap.fromTo(
-      split.chars!,   // ✅ FINAL FIX
+      split.chars || [],   // ✅ safe fix
       { autoAlpha: 0, y: 80, rotate: 10 },
       {
         autoAlpha: 1,
