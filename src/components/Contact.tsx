@@ -15,7 +15,7 @@ const Contact = () => {
               </a>
             </p>
             <h4>Education</h4>
-            <p>11th Grade</p>
+            <p>12th Grade</p>
           </div>
           <div className="contact-box">
             <h4>Social</h4>
